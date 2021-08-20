@@ -1,0 +1,28 @@
+---
+
+- name: To run website on web server
+  hosts: web
+  become: yes
+
+  tasks: 
+  - name: To install git
+    yum: 
+     name: git
+     state: installed
+
+  - name: To install httpd
+    yum: 
+      name: httpd
+      state: installed
+
+  - name: To start the web server with help of git in ansible
+    git: 
+     repo: https://github.com/ravi2krishna/ecomm.git
+     dest: /var/www/html
+
+  - name: To start httpd service
+    service: 
+      name: httpd
+      state: started
+
+...
